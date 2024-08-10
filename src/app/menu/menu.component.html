@@ -1,0 +1,12 @@
+<mat-toolbar>
+	<div class="logo">
+		<mat-icon>vaccines</mat-icon>
+	</div>
+	@if (authService.isLoggedIn){
+	<div class="logout">
+		<button mat-icon-button (click)="logout()">
+			<mat-icon>logout</mat-icon>
+		</button>
+	</div>
+	}
+</mat-toolbar>
