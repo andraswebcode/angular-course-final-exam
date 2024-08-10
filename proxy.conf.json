@@ -1,0 +1,7 @@
+{
+	"/api": {
+		"target": "https://europe-central2-webuni-js-covid-exam.cloudfunctions.net/vaccines",
+		"secure": true,
+		"changeOrigin": true
+	}
+}

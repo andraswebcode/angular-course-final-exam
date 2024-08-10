@@ -6,7 +6,7 @@ import { authGuard } from './auth/auth.guard';
 export const routes: Routes = [
 	{
 		path: '',
-		redirectTo: 'covid-data',
+		redirectTo: 'data',
 		pathMatch: 'full'
 	},
 	{
@@ -18,9 +18,8 @@ export const routes: Routes = [
 		component: RegistrationComponent
 	},
 	{
-		path: 'covid-data',
+		path: 'data',
 		canActivate: [authGuard],
-		loadComponent: () =>
-			import('./covid-data/covid-data.component').then((m) => m.CovidDataComponent)
+		loadComponent: () => import('./data/data/data.component').then((m) => m.DataComponent)
 	}
 ];

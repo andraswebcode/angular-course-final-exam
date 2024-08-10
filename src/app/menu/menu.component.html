@@ -1,6 +1,9 @@
 <mat-toolbar>
 	<div class="logo">
 		<mat-icon>vaccines</mat-icon>
+		@if (authService.isLoggedIn){
+		<span class="title">Hello {{ authService.currentUser()?.username }}</span>
+		}
 	</div>
 	@if (authService.isLoggedIn){
 	<div class="logout">

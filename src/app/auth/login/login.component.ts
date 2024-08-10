@@ -38,7 +38,7 @@ export class LoginComponent {
 			this.authService
 				.login(this.username, this.password)
 				.pipe(
-					tap(() => this.router.navigate(['/covid-data'])),
+					tap(() => this.router.navigate(['/data'])),
 					takeUntilDestroyed(this.destroyRef)
 				)
 				.subscribe();

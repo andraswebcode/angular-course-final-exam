@@ -1,0 +1,31 @@
+<mat-drawer-container>
+	<mat-drawer mode="side" opened>
+		<div class="countries">
+			<span>Select Countries</span>
+			@for (country of countries; track country.name){
+			<div class="country">
+				<mat-checkbox
+					[checked]="country.selected"
+					(change)="selectCountry($index, $event.checked)"
+				>
+					{{ country.name }}
+				</mat-checkbox>
+			</div>
+			}
+		</div>
+		<div class="datatoshow">
+			<span>Select Data to Show</span>
+			@for (data of dataToShow; track data.name){
+			<div class="data">
+				<mat-checkbox [checked]="data.show" (change)="selectData($index, $event.checked)">
+					{{ data.name }}
+				</mat-checkbox>
+			</div>
+			}
+		</div>
+	</mat-drawer>
+	<mat-drawer-content>
+		{{ chartData | json }}
+		<canvas #chartCanvas></canvas>
+	</mat-drawer-content>
+</mat-drawer-container>
