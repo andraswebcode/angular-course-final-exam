@@ -1,4 +1,4 @@
-import { Component, DestroyRef } from '@angular/core';
+import { Component, DestroyRef, signal } from '@angular/core';
 import {
 	FormControl,
 	FormGroup,
@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { catchError, tap } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs';
 import { RegisterUser } from '../models/user.model';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -40,6 +40,8 @@ export class RegistrationComponent {
 		passwordConfirm: new FormControl<string>('', [Validators.required])
 	});
 
+	loading = signal(false);
+
 	constructor(
 		private readonly authService: AuthService,
 		private readonly router: Router,
@@ -48,6 +50,7 @@ export class RegistrationComponent {
 	) {}
 
 	register() {
+		this.loading.set(true);
 		if (this.registration.value.password === this.registration.value.passwordConfirm) {
 			const user: RegisterUser = {
 				username: this.registration.value.username!,
@@ -58,6 +61,7 @@ export class RegistrationComponent {
 				.register(user)
 				.pipe(
 					tap(() => this.router.navigate(['/data'])),
+					finalize(() => this.loading.set(false)),
 					catchError((error) => {
 						this.snackBar.open(error, '', {
 							duration: 4000
@@ -67,6 +71,11 @@ export class RegistrationComponent {
 					takeUntilDestroyed(this.destroyRef)
 				)
 				.subscribe();
+		} else {
+			this.loading.set(false);
+			this.snackBar.open('Passwords must be match.', '', {
+				duration: 4000
+			});
 		}
 	}
 }
