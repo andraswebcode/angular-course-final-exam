@@ -16,7 +16,7 @@ export interface Data {
 	updated: string;
 }
 
-export type DataName = 'administered' | 'people_vaccinated' | 'population';
+export type DataName = 'administered' | 'people_vaccinated' | 'population' | 'sq_km_area';
 
 export interface DataToShow {
 	name: DataName;

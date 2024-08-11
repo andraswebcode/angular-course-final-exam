@@ -1,7 +1,7 @@
 <mat-drawer-container>
 	<mat-drawer mode="side" opened>
 		<div class="countries">
-			<span>Select Countries</span>
+			<span class="label">Select Countries</span>
 			@for (country of countries; track country.name){
 			<div class="country">
 				<mat-checkbox
@@ -14,7 +14,7 @@
 			}
 		</div>
 		<div class="datatoshow">
-			<span>Select Data to Show</span>
+			<span class="label">Select Data to Show</span>
 			@for (data of dataToShow; track data.name){
 			<div class="data">
 				<mat-checkbox [checked]="data.show" (change)="selectData($index, $event.checked)">
