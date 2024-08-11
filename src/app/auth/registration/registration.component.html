@@ -1,29 +1,46 @@
 <mat-card>
-	<mat-card-header>
-		<mat-card-title>Registration</mat-card-title>
-		<mat-card-subtitle>
-			Already have an account?
-			<a routerLink="/login">Login here.</a>
-		</mat-card-subtitle>
-	</mat-card-header>
-	<mat-card-content>
-		<mat-form-field appearance="outline">
-			<mat-label>Username:</mat-label>
-			<input type="text" matInput required [(ngModel)]="username" />
-		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label>Email:</mat-label>
-			<input type="email" matInput required [(ngModel)]="email" />
-		</mat-form-field>
-		<mat-form-field appearance="outline">
-			<mat-label>Password:</mat-label>
-			<input type="password" matInput required [(ngModel)]="password" /> </mat-form-field
-		><mat-form-field appearance="outline">
-			<mat-label>Confirm Password:</mat-label>
-			<input type="password" matInput required [(ngModel)]="passwordConfirm" />
-		</mat-form-field>
-	</mat-card-content>
-	<mat-card-actions>
-		<button mat-button (click)="register()">Register</button>
-	</mat-card-actions>
+	<form [formGroup]="registration" (submit)="register()">
+		<mat-card-header>
+			<mat-card-title>Registration</mat-card-title>
+			<mat-card-subtitle>
+				Already have an account?
+				<a routerLink="/login">Login here.</a>
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-content>
+			<mat-form-field appearance="outline">
+				<mat-label>Username:</mat-label>
+				<input type="text" matInput formControlName="username" />
+				@if (registration.controls.username.errors?.['required']){
+				<mat-error>Username is required.</mat-error>
+				}
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Email:</mat-label>
+				<input type="email" matInput formControlName="email" />
+				@if (registration.controls.email.errors?.['required']){
+				<mat-error>Email is required.</mat-error>
+				} @else if (registration.controls.email.errors?.['email']){
+				<mat-error>Email must be a valid email.</mat-error>
+				}
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Password:</mat-label>
+				<input type="password" matInput formControlName="password" />
+				@if (registration.controls.password.errors?.['required']){
+				<mat-error>Password is required.</mat-error>
+				}
+			</mat-form-field>
+			<mat-form-field appearance="outline">
+				<mat-label>Confirm Password:</mat-label>
+				<input type="password" matInput formControlName="passwordConfirm" />
+				@if (registration.controls.passwordConfirm.errors?.['required']){
+				<mat-error>Confirm password is required.</mat-error>
+				}
+			</mat-form-field>
+		</mat-card-content>
+		<mat-card-actions>
+			<button mat-button type="submit">Register</button>
+		</mat-card-actions>
+	</form>
 </mat-card>

@@ -13,7 +13,7 @@ import { Chart, registerables } from 'chart.js/auto';
 @Component({
 	selector: 'app-data',
 	standalone: true,
-	imports: [MatSidenavModule, MatFormFieldModule, MatCheckboxModule, JsonPipe],
+	imports: [MatSidenavModule, MatFormFieldModule, MatCheckboxModule],
 	templateUrl: './data.component.html',
 	styleUrl: './data.component.scss'
 })
@@ -103,7 +103,9 @@ export class DataComponent implements OnInit, AfterViewInit {
 			return;
 		}
 
-		if (!this._chart) {
+		if (this._chart) {
+			this._updateChart();
+		} else {
 			this._chart = new Chart(ctx, {
 				type: 'bar',
 				data: this.chartData
@@ -119,13 +121,17 @@ export class DataComponent implements OnInit, AfterViewInit {
 				this.dataService
 					.getData(country.name)
 					.pipe(
-						tap((data) => (country.data = data)),
+						tap((data) => {
+							country.data = data;
+							this._updateChart();
+						}),
 						takeUntilDestroyed(this.destroyRef)
 					)
 					.subscribe();
+			} else {
+				this._updateChart();
 			}
 		}
-		this._updateChart();
 	}
 
 	public selectData(index: number, show: boolean) {
