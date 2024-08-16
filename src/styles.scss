@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+// A választott material téma valamiért nem teszi rá a világos színt a title-re,
+// ezért nem látszik jól sötét háttérrel.
+// Ezt itt pótoljuk.
+mat-card-title,
+mat-card-subtitle a {
+	color: var(--mat-card-subtitle-text-color);
+}
+
+mat-card-title {
+	margin-bottom: 8px !important;
+}
+mat-card-subtitle {
+	margin-bottom: 12px !important;
+}

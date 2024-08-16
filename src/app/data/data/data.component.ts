@@ -41,7 +41,7 @@ export class DataComponent implements OnInit, AfterViewInit {
 		},
 		{
 			name: 'Austria',
-			selected: false
+			selected: true
 		},
 		{
 			name: 'Romania',
@@ -56,11 +56,11 @@ export class DataComponent implements OnInit, AfterViewInit {
 		},
 		{
 			name: 'administered',
-			show: false
+			show: true
 		},
 		{
 			name: 'people_vaccinated',
-			show: false
+			show: true
 		},
 		{
 			name: 'sq_km_area',
